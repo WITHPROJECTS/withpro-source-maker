@@ -6,6 +6,7 @@ require('./gulp-task/config')
 require('./gulp-task/sass')
 require('./gulp-task/coffee')
 require('./gulp-task/js')
+require('./gulp-task/iconfont')
 require('./gulp-task/watch')
 
 # ==============================================================================

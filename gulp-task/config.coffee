@@ -7,12 +7,15 @@ notifier = require('node-notifier')
 # ==============================================================================
 
 conf.path =
+    'gulp' :
+        'task' : 'gulp-task/'
     # 入力ディレクトリ ---------------------------------------------------------
     'in' :
         'dir'    : 'src'
         'sass'   : 'src/sass/'
         'js'     : 'src/js/'
         'coffee' : 'src/coffee/'
+        'font'   : 'src/font/'
     # 出力ディレクトリ ---------------------------------------------------------
     'out' :
         'dir'   : 'build'
@@ -35,6 +38,16 @@ conf.watchFile =
     'sass'   : path.join(conf.path.in.sass,'**/*.sass')
     'coffee' : path.join(conf.path.in.coffee,'**/*.coffee')
     'js'     : path.join(conf.path.in.js,'**/*.js')
+
+# ==============================================================================
+#
+# 命名規則 ファイル生成時など
+#
+# ==============================================================================
+conf.namingRules =
+    'joinWordsExt' : '-'  # 単語同士をつなげる文字
+    'modeExt'      : '--' # 対象名とその状態を表す名称をつなげる文字
+    'prefixExt'    : '__' # 対象の種別を表す文字
 
 # ==============================================================================
 #
@@ -128,6 +141,22 @@ conf.css =
                 'sound'   : 'Glass'
             )
             return this
+
+# ==============================================================================
+#
+# icon font
+#
+# ==============================================================================
+conf.iconfont =
+    'templatePath' : path.join(conf.path.gulp.task, 'iconfont-assets/sample-template')
+    'sassFileName' : '_iconfont'
+    'sassFilePath' : path.join(conf.path.in.sass,'mixin/')
+    'compileParam' :
+        'fontName'       : 'iconfont'
+        'prependUnicode' : true
+        'formats'        : ['ttf', 'woff', 'svg']
+        'normalize'      : true
+        'fixedWidth'     : true
 
 
 conf.temp = {}
