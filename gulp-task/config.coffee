@@ -11,19 +11,22 @@ conf.path =
         'task' : 'gulp-task/'
     # 入力ディレクトリ ---------------------------------------------------------
     'in' :
-        'dir'    : 'src'
-        'sass'   : 'src/sass/'
-        'js'     : 'src/js/'
-        'coffee' : 'src/coffee/'
-        'font'   : 'src/font/'
+        'dir'    : 'asset'
+        'sass'   : 'asset/sass/'
+        'js'     : 'asset/js/'
+        'coffee' : 'asset/coffee/'
+        'font'   : 'asset/font/'
+        'haml'   : 'asset/haml/'
+        'slim'   : 'asset/slim/'
     # 出力ディレクトリ ---------------------------------------------------------
     'out' :
-        'dir'   : 'build'
-        'js'    : 'build/js'
-        'jsLib' : 'build/js/lib'
-        'css'   : 'build/css'
-        'img'   : 'build/img'
-        'font'  : 'build/font'
+        'dir'   : 'dest/univ'
+        'js'    : 'dest/univ/js'
+        'jsLib' : 'dest/univ/js/lib'
+        'css'   : 'dest/univ/css'
+        'img'   : 'dest/univ/img'
+        'font'  : 'dest/univ/font'
+        'html'  : 'dest/univ'
     # ライブラリディレクトリ ---------------------------------------------------
     'lib' :
         'sass' : 'lib/sass'
@@ -38,6 +41,8 @@ conf.watchFile =
     'sass'   : path.join(conf.path.in.sass,'**/*.sass')
     'coffee' : path.join(conf.path.in.coffee,'**/*.coffee')
     'js'     : path.join(conf.path.in.js,'**/*.js')
+    'haml'   : path.join(conf.path.in.haml,'**/*.haml')
+    'slim'   : path.join(conf.path.in.slim,'**/*.slim')
 
 # ==============================================================================
 #
@@ -150,13 +155,55 @@ conf.css =
 conf.iconfont =
     'templatePath' : path.join(conf.path.gulp.task, 'iconfont-assets/sample-template')
     'sassFileName' : '_iconfont'
-    'sassFilePath' : path.join(conf.path.in.sass,'mixin/')
+    'sassFilePath' : 'mixin' # Sassディレクトリからの相対
+    # 'sassFilePath' : path.join(conf.path.in.sass,'mixin/')
     'compileParam' :
         'fontName'       : 'iconfont'
         'prependUnicode' : true
         'formats'        : ['ttf', 'woff', 'svg']
         'normalize'      : true
         'fixedWidth'     : true
+
+# ==============================================================================
+#
+# Haml
+#
+# ==============================================================================
+conf.haml =
+    'compileParam' :
+        'escapeHtml'            : false
+        'doubleQuoteAttributes' : false
+        'encodings'             : 'UTF-8'
+    # watch停止防止処理 --------------------------------------------------------
+    'plumber' :
+        'errorHandler' : (err)->
+            notifier.notify(
+                'title'   : 'Haml Error'
+                'message' : err.message
+                'sound'   : 'Glass'
+            )
+            return this
+
+# ==============================================================================
+#
+# Slim
+#
+# ==============================================================================
+conf.slim =
+    'compileParam' :
+        'pretty'  : true
+        'include' : true
+        'options' : 'include_dirs=["asset/slim/"]'
+    # watch停止防止処理 --------------------------------------------------------
+    'plumber' :
+        'errorHandler' : (err)->
+            console.log err.message
+            notifier.notify(
+                'title'   : 'Slim Error'
+                'message' : err.message
+                'sound'   : 'Glass'
+            )
+            return this
 
 
 conf.temp = {}
