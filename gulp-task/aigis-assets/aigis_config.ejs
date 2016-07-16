@@ -1,0 +1,20 @@
+# The directory containing the source files to parse recursively
+source:
+<% for (var i = 0;i < source.length; i++){ -%>
+  <%= '- '+source[i] %>
+<% } -%>
+
+# The directory that aigis will build to
+dest: <%= dest %>
+
+# The assets needed to build the docs
+# You may put doc related assets here too: images, css, etc.
+dependencies:
+<% for (var i = 0;i < dependencies.length; i++){ -%>
+  <%= '- '+dependencies[i] %>
+<% } -%>
+
+# The directory containing the tempalte files to generate pages
+# It must contain 'layout.xxx' and 'index.xxx' (.ejs or .jade or .hbs)
+template_dir: ./template_ejs
+template_engine: <%= template_engine %>

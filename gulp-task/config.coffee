@@ -3,30 +3,30 @@ path     = require('path')
 conf     = require('../gulpfile')
 cache    = require('gulp-cached')
 notifier = require('node-notifier')
+_        = require('lodash')
 
 # ==============================================================================
 
 conf.path =
+    'projectRoot' : './'
     'gulp' :
         'task' : 'gulp-task/'
     # 入力ディレクトリ ---------------------------------------------------------
     'in' :
-        'dir'    : 'asset'
-        'sass'   : 'asset/sass/'
-        'js'     : 'asset/js/'
-        'coffee' : 'asset/coffee/'
-        'font'   : 'asset/font/'
-        'haml'   : 'asset/haml/'
-        'slim'   : 'asset/slim/'
+        'dir'    : 'src'
+        'sass'   : 'src/sass/'
+        'js'     : 'src/js/'
+        'coffee' : 'src/coffee/'
+        'font'   : 'src/font/'
     # 出力ディレクトリ ---------------------------------------------------------
     'out' :
-        'dir'   : 'dest/univ'
-        'js'    : 'dest/univ/js'
-        'jsLib' : 'dest/univ/js/lib'
-        'css'   : 'dest/univ/css'
-        'img'   : 'dest/univ/img'
-        'font'  : 'dest/univ/font'
-        'html'  : 'dest/univ'
+        'dir'        : 'build'
+        'js'         : 'build/js'
+        'jsLib'      : 'build/js/lib'
+        'css'        : 'build/css'
+        'img'        : 'build/img'
+        'font'       : 'build/font'
+        'styleguide' : 'styleguide'
     # ライブラリディレクトリ ---------------------------------------------------
     'lib' :
         'sass' : 'lib/sass'
@@ -41,8 +41,6 @@ conf.watchFile =
     'sass'   : path.join(conf.path.in.sass,'**/*.sass')
     'coffee' : path.join(conf.path.in.coffee,'**/*.coffee')
     'js'     : path.join(conf.path.in.js,'**/*.js')
-    'haml'   : path.join(conf.path.in.haml,'**/*.haml')
-    'slim'   : path.join(conf.path.in.slim,'**/*.slim')
 
 # ==============================================================================
 #
@@ -117,7 +115,8 @@ conf.coffee =
 conf.css =
     # Sass use Compass ---------------------------------------------------------
     'sass' :
-        'style'       : 'expanded'
+        'style'       : 'compressed'
+        'comments'    : true
         'sourcemap'   : true
         'time'        : true
         'environment' : 'production'
@@ -134,7 +133,10 @@ conf.css =
         'autoprefixer' :
            'browsers' : ['last 3 version']
            'cascade'  : true
-        'minifier' : true
+        'minifier' : false
+        #'minifier' :
+        #    'preserveHacks'     : true
+        #    'removeAllComments' : false
         'rem'      : true
         'opacity'  : false
     # watch停止防止処理 --------------------------------------------------------
@@ -166,44 +168,43 @@ conf.iconfont =
 
 # ==============================================================================
 #
-# Haml
+# browser-sync
 #
 # ==============================================================================
-conf.haml =
-    'compileParam' :
-        'escapeHtml'            : false
-        'doubleQuoteAttributes' : false
-        'encodings'             : 'UTF-8'
-    # watch停止防止処理 --------------------------------------------------------
-    'plumber' :
-        'errorHandler' : (err)->
-            notifier.notify(
-                'title'   : 'Haml Error'
-                'message' : err.message
-                'sound'   : 'Glass'
-            )
-            return this
+conf.browserSync =
+    'localSrvParam' :
+        'ui' :
+            'port' : 5010
+        'files'  : _.toArray(conf.watchFile)
+        'port'   : 5000
+        'open'   : 'external'
+        'server' :
+            'directory' : true
+            'baseDir'   : conf.path.projectRoot
+    'styleguideSrvParam' :
+        'ui' :
+            'port' : 5011
+        'port' : 5001
+        'open' : 'external'
+        'server' :
+            'directory' : true
+            'baseDir'   : conf.path.out.styleguide
 
 # ==============================================================================
 #
-# Slim
+# styleguide
 #
 # ==============================================================================
-conf.slim =
-    'compileParam' :
-        'pretty'  : true
-        'include' : true
-        'options' : 'include_dirs=["asset/slim/"]'
-    # watch停止防止処理 --------------------------------------------------------
-    'plumber' :
-        'errorHandler' : (err)->
-            console.log err.message
-            notifier.notify(
-                'title'   : 'Slim Error'
-                'message' : err.message
-                'sound'   : 'Glass'
-            )
-            return this
+conf.styleguide =
+    'aigis' :
+        'confFile'     : path.join(conf.path.gulp.task, 'aigis-assets/aigis_config.yml')
+        'confTempFile' : path.join(conf.path.gulp.task, 'aigis-assets/aigis_config.ejs')
+        'param' :
+            'source'          : 'aigis_assets' # aigis_config.ymlからのパス
+            'template_dir'    : 'template_ejs' # aigis_config.ymlからのパス
+            'dest'            : conf.path.out.styleguide
+            'dependencies'    : ['aigis_assets']
+            'template_engine' : 'ejs'
 
 
 conf.temp = {}

@@ -7,7 +7,12 @@ require('./gulp-task/sass')
 require('./gulp-task/coffee')
 require('./gulp-task/js')
 require('./gulp-task/iconfont')
+# require('./gulp-task/aigis')
+require('./gulp-task/styleguide')
+require('./gulp-task/browser-sync')
 require('./gulp-task/watch')
+
+gulp.task('default', ['watch'])
 
 # ==============================================================================
 #

@@ -1,6 +1,6 @@
 {
   "name": "source_maker",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "scripts": {},
   "private": true,
   "engines": {
@@ -13,7 +13,9 @@
     "babel-preset-stage-0": "^6.5.0",
     "babel-preset-stage-1": "^6.5.0",
     "babel-preset-stage-2": "^6.5.0",
+    "browser-sync": "^2.13.0",
     "coffee-script": "^1.10.0",
+    "devbridge-styleguide": "^0.4.10",
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
     "gulp-cached": "^1.1.0",
