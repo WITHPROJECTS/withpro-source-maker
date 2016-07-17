@@ -115,11 +115,11 @@ conf.coffee =
 conf.css =
     # Sass use Compass ---------------------------------------------------------
     'sass' :
-        'style'       : 'compressed'
+        'style'       : 'nested'
         'comments'    : true
         'sourcemap'   : true
         'time'        : true
-        'environment' : 'production'
+        'environment' : 'development'
         'sass'        : conf.path.in.sass
         'css'         : conf.path.out.css
         'javascript'  : conf.path.out.js
@@ -196,6 +196,9 @@ conf.browserSync =
 #
 # ==============================================================================
 conf.styleguide =
+    'styleguide' :
+        'param' :
+            'styleguidePath' : conf.path.out.styleguide
     'aigis' :
         'confFile'     : path.join(conf.path.gulp.task, 'aigis-assets/aigis_config.yml')
         'confTempFile' : path.join(conf.path.gulp.task, 'aigis-assets/aigis_config.ejs')

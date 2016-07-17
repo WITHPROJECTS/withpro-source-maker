@@ -1,6 +1,6 @@
 {
 "version": 3,
-"mappings": ";;;;GAOA,GAAG,CACC,KAAK,CAAG,GAAG,CACX,KAAK,CAAG,KAAK",
+"mappings": "AAOA,KAAK,CACD,KAAK,CAAG,IAAI",
 "sources": ["../../src/sass/test.sass"],
 "names": [],
 "file": "test.css"

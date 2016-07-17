@@ -1,15 +1,33 @@
-gulp        = require('gulp')
-path        = require('path')
+gulp       = require('gulp')
+path       = require('path')
+fs         = require('fs')
+execSync   = require('child_process').execSync
+styleguide = require('devbridge-styleguide')
 # ejs         = require('gulp-ejs')
 # rename      = require('gulp-rename')
 # _           = require('lodash')
 # browserSync = require('browser-sync').create()
+
 styleguide  = require('devbridge-styleguide')
 conf        = require('../gulpfile')
 
-gulp.task('styleguide', ->
+gulp.task('styleguide', ['browserSnyc-styleguide'], ->
+    _conf = conf.styleguide.styleguide.param
 
-    styleguide.startServer()
+    if !fs.existsSync(conf.path.out.styleguide)
+        execSync('styleguide initialize '+conf.path.out.styleguide)
+
+    styleguide.startServer(_conf)
+
+
+    # fs.stats(conf.path.out.styleguide, (err, stats)->
+        # if obj and obj[]
+        # console.log stats
+        # return
+    # )
+    # styleguide.startServer()
+
+
     # _conf    = conf.styleguide.aigis
     # _param   = _conf.param
     # assetDir = path.dirname(_conf.confFile)

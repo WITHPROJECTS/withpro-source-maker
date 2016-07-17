@@ -15,7 +15,7 @@ gulp.task('sass',->
         .pipe( cache( 'sass' ) )
         .pipe( plumbler( _conf.plumber ) )
         .pipe( compass( _conf.sass ) )
-        .pipe( pleeease( _conf.pleeease ) )
+        # .pipe( pleeease( _conf.pleeease ) )
         .pipe( plumbler.stop() )
         .pipe( gulp.dest( destDir ) )
     if task is 'watch'

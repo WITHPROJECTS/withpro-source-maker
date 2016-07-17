@@ -1,7 +1,6 @@
-/*!
- * ------
- *
- * ------
- */div{color:red;width:110px}/*!
- * fuga
- */
+/* ---------
+ * this is a test
+ * --------- */
+/* line 8, ../../src/sass/test.sass */
+#test {
+  color: #111; }
