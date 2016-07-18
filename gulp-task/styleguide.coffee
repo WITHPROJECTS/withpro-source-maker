@@ -11,7 +11,7 @@ styleguide = require('devbridge-styleguide')
 styleguide  = require('devbridge-styleguide')
 conf        = require('../gulpfile')
 
-gulp.task('styleguide', ['browserSnyc-styleguide'], ->
+gulp.task('styleguide', ['browserSnyc:styleguide'], ->
     _conf = conf.styleguide.styleguide.param
 
     if !fs.existsSync(conf.path.out.styleguide)

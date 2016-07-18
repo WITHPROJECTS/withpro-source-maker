@@ -6,7 +6,6 @@ notifier = require('node-notifier')
 _        = require('lodash')
 
 # ==============================================================================
-
 conf.path =
     'projectRoot' : './'
     'gulp' :
@@ -26,6 +25,7 @@ conf.path =
         'css'        : 'build/css'
         'img'        : 'build/img'
         'font'       : 'build/font'
+        'map'        : 'build/css'
         'styleguide' : 'styleguide'
     # ライブラリディレクトリ ---------------------------------------------------
     'lib' :
@@ -113,21 +113,22 @@ conf.coffee =
 #
 # ==============================================================================
 conf.css =
+    'sassImage' :
+        'destDir'  : path.join(conf.path.in.sass, 'func')
+        'destFile' : '_sass-image.scss'
+        'param'    :
+            'images_path' : conf.path.out.img
+            'css_path'    : conf.path.out.css
+            # 'http_images_path'
     # Sass use Compass ---------------------------------------------------------
     'sass' :
-        'style'       : 'nested'
-        'comments'    : true
-        'sourcemap'   : true
-        'time'        : true
-        'environment' : 'development'
-        'sass'        : conf.path.in.sass
-        'css'         : conf.path.out.css
-        'javascript'  : conf.path.out.js
-        'image'       : conf.path.out.img
-        'font'        : conf.path.out.font
-        'import_path' : [
-            conf.path.lib.sass
-        ]
+        'outputStyle'       : 'expanded'
+        'precision'         : 5
+        'sourceComments'    : false
+        'sourceMap'         : true
+        'sourceMapContents' : false
+        'sourceMapEmbed'    : false
+        'includePaths'      : [ conf.path.lib.sass ]
     # CSS互換処理 --------------------------------------------------------------
     'pleeease' :
         'autoprefixer' :
@@ -147,6 +148,7 @@ conf.css =
                 'message' : err.message
                 'sound'   : 'Glass'
             )
+            delete cache.caches['sass']
             return this
 
 # ==============================================================================

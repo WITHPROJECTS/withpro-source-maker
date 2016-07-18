@@ -2,7 +2,7 @@ gulp = require('gulp')
 path = require('path')
 conf = require('../gulpfile')
 
-gulp.task('watch', ['browserSnyc-localServer'], ->
+gulp.task('watch', ->
     # Sass ---------------------------------------------------------------------
     sassWatch = gulp.watch(conf.watchFile.sass,['sass'])
     # JS -----------------------------------------------------------------------

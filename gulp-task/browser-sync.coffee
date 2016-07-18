@@ -8,7 +8,7 @@ conf        = require('../gulpfile')
 # ==============================================================================
 # ローカルサーバー
 # ==============================================================================
-gulp.task('browserSnyc-localServer', ->
+gulp.task('browserSnyc:localServer', ->
     _conf = conf.browserSync
     browserSync.init(_conf.localSrvParam)
     return this
@@ -17,7 +17,7 @@ gulp.task('browserSnyc-localServer', ->
 # ==============================================================================
 # スタイルガイドサーバー
 # ==============================================================================
-gulp.task('browserSnyc-styleguide', ->
+gulp.task('browserSnyc:styleguide', ->
     _conf = conf.browserSync
     browserSync.init(_conf.styleguideSrvParam)
     return this
