@@ -1,15 +1,12 @@
-gulp           = require('gulp')
-path           = require('path')
-conf           = {cwd : process.cwd()}
-module.exports = conf
 require('./gulp-task/config')
-require('./gulp-task/sass')
-require('./gulp-task/coffee')
-require('./gulp-task/js')
-require('./gulp-task/iconfont')
-require('./gulp-task/watch')
 
-gulp.task('default', ['watch'])
+#require('./gulp-task/sass')
+#require('./gulp-task/coffee')
+#require('./gulp-task/js')
+#require('./gulp-task/iconfont')
+#require('./gulp-task/watch')
+#
+#gulp.task('default', ['watch'])
 
 # ==============================================================================
 #

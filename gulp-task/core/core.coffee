@@ -1,27 +1,10 @@
-conf           = {cwd : process.cwd()}
-module.exports = conf
-
-# ==============================================================================
-# パスの設定
-# ==============================================================================
-conf.path = {}
-conf.path['projectRoot'] = './'
-# 入力ディレクトリ
-conf.path['in'] = { 'dir' : 'src' }
-# 出力ディレクトリ
-conf.path['out'] = { 'dir' : 'build' }
-
-
-
-# require('./gulp-task/core/core')
-
 # gulp     = require('gulp')
 # path     = require('path')
 # conf     = require('../gulpfile')
 # cache    = require('gulp-cached')
 # notifier = require('node-notifier')
 # _        = require('lodash')
-#
+# 
 # # ==============================================================================
 # conf.path =
 #     'projectRoot' : './'
