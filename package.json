@@ -12,7 +12,9 @@
   "devDependencies": {
     "inquirer": "^1.2.3"
   },
-  "scripts": {},
+  "scripts": {
+      "test": "node tasks/hello.js"
+  },
   "repository": {
     "type": "git",
     "url": "git@github.com:WITHPROJECTS/withpro-source-maker.git"
