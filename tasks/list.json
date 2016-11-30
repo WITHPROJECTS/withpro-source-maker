@@ -1,0 +1,8 @@
+[
+    {
+        "name"           : "mithril",
+        "git"            : "",
+        "defaultVersion" : "latest",
+        "promptName"     : "mithril"
+    }
+]
