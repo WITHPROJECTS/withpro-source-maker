@@ -10,10 +10,13 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "inquirer": "^1.2.3"
+    "child-process-promise": "^2.2.0",
+    "colors": "^1.1.2",
+    "inquirer": "^1.2.3",
+    "mithril": "^0.2.5"
   },
   "scripts": {
-      "test": "node tasks/hello.js"
+    "test": "node tasks/hello.js"
   },
   "repository": {
     "type": "git",

@@ -1,13 +1,8 @@
 [
     {
-        "name"           : "gulp-sass",
+        "name"           : "mithril",
         "git"            : "",
-        "defaultVersion" : false,
-        "promptName"     : "Gulp Sass"
-    },{
-        "name"           : "gulp-js",
-        "git"            : "",
-        "defaultVersion" : false,
-        "promptName"     : "Gulp JavaScript [use babel]"
+        "defaultVersion" : "latest",
+        "promptName"     : "mithril"
     }
 ]
