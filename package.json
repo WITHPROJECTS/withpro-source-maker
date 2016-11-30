@@ -1,25 +1,13 @@
 {
-<<<<<<< HEAD
-  "name": "source_maker",
-  "version": "2.0.0",
-=======
   "name": "withpro-source-maker",
   "version": "2.0.0",
   "description": "website source env.",
   "main": "withpro-source-maker.js",
->>>>>>> 138983384df286096b8a84daeb46167081192e88
   "private": true,
   "engines": {
     "node": "^6.9.1",
     "npm": "^4.0.1"
   },
-<<<<<<< HEAD
-  "author": "yokotak0527",
-  "devDependencies": {
-    "gulp": "^3.9.1",
-    "gulp-cli": "^1.2.2"
-  }
-=======
   "dependencies": {},
   "devDependencies": {
     "child-process-promise": "^2.2.0",
@@ -37,5 +25,4 @@
   "author": "WITHPROJECTS inc.",
   "homepage": "http://www.withprojects.co.jp/",
   "license": "MIT"
->>>>>>> 138983384df286096b8a84daeb46167081192e88
 }
