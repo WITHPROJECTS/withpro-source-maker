@@ -1,8 +1,6 @@
 let colors    = require("colors");
 let inquirer  = require("inquirer");
-// let spawn     = require('child-process-promise').spawn;
-let spawn     = require('child_process').spawn;
-let exec      = require('child_process').exec;
+let spawn     = require('child-process-promise').spawn;
 let myPackage = require("../package.json");
 let state     = require("./state.json");
 let tasksData = require("./list.json");
@@ -12,6 +10,11 @@ let result    = [];
 
 if(state.init) return false;
 state.init = true;
+
+tasksData.forEach((obj)=>{
+    obj.version    = typeof obj.version === 'undefined' ? 'latest' : obj.version;
+    obj.promptName = typeof obj.promptName === 'undefined' ? obj.name : obj.promptName;
+});
 
 console.log(`
 ===========================================
@@ -42,7 +45,6 @@ let iputTheVersion = (answer)=>{
         console.log('noting install'.red.bold);
         return false;
     }
-    console.log('  ↓');
     answer = answer.tasks;
     result = [];
     let q  = [];
@@ -52,10 +54,10 @@ let iputTheVersion = (answer)=>{
                 q.push({
                     'type'    : `input`,
                     'name'    : `${obj.name}`,
-                    'message' : `${obj.name} version (default -> ${obj.defaultVersion})`,
+                    'message' : `${obj.name} version (default -> ${obj.version})`,
                     'filter'  : ((obj)=>{
                         return (val)=>{
-                            val = !val ? obj.defaultVersion : val;
+                            val = !val ? obj.version : val;
                             obj.version = val;
                             return val;
                         }
@@ -73,12 +75,11 @@ let iputTheVersion = (answer)=>{
 // confirmation
 // =============================================================================
 let confirmation = (answer)=>{
-    console.log('  ↓');
-    console.log('------ Install module list ------\n');
+    console.log('------', 'Install module list'.bold, '------');
     result.forEach((obj)=>{
-        console.log(`${obj.name} -> version ${obj.version}`);
+        console.log(`・${obj.name}`.bold, `:`, `version ${obj.version}`);
     });
-    console.log('\n---------------------------------');
+    console.log('---------------------------------');
     prompt({
         'type'    : 'list',
         'name'    : 'confirmation',
@@ -101,37 +102,59 @@ let confirmation = (answer)=>{
 // =============================================================================
 // install
 // =============================================================================
-
 let install = ()=>{
-    // console.log(result);
-    result.forEach((obj)=>{
-        if(!obj.git){
-            let a = exec(`npm i -D ${obj.name}@${obj.version}`);
-            console.log(a);
-            // a.stdout.on('data', function(data){
-            //     console.log(data);
-            // });
-            // console.log(a);
-            // let a = spawn('npm', ['i', '-D', `${obj.name}@${obj.version}`]);
-            // console.log(a);
-            // a.on('finish', function(data){
-            //     console.log(data);
-            // });
-            // console.dir(a.);
-            // let child   = promise.childProcess;
-            // console.log(child.stdin);
-            // spawn.on('message', function(data){
-            //     console.log(data);
-            // });
-            // console.log(childProcess);
-            // childProcess.stdout.on('data', function (data) {
-            //     console.log('[spawn] stdout: ', data.toString());
-            // });
-            // spawn(`npm i -D ${obj.name}@${obj.version}`).then((result)=>{
-            //     console.log('ok');
-            // });
+    let i          = 0;
+    let l          = result.length;
+    let promise    = null;
+    let installErr = 0;
+    let set = ()=>{
+        promise = npmInstall(result[i]);
+        promise
+            .then(((obj)=>{
+                return (result)=>{
+                    console.log(`-> ${obj.name} installed.`);
+                    if(i >= l){
+                        end();
+                    }else{
+                        set();
+                        i++;
+                    }
+                }
+            })(result[i]))
+            .catch(((obj)=>{
+                return (err)=>{
+                    console.log(`-> ${obj.name} failed.`.red);
+                    installErr++;
+                    if(i >= l){
+                        end();
+                    }else{
+                        set();
+                        i++;
+                    }
+                }
+            })(result[i]));
+        promise.childProcess.stderr.on('data', (data)=>{
+            console.log('[spawn] stderr: ', data.toString());
+        });
+    }
+    let end = ()=>{
+        if(installErr){
+            console.log(`process is all done. but ${installErr} package fail to install.`.red);
+        }else{
+            console.log(`process is all done.`.green);
         }
-    });
+    }
+    set();
+    i++;
+}
+
+let npmInstall = (obj)=>{
+    console.log(`${obj.name} install...\n`);
+    if(!obj.git){
+        return spawn(`npm`, [`i`, `-D`, `${obj.name}@${obj.version}`]);
+    }else{
+        return spawn(`npm`, [`i`, `-D`, `${obj.git}`]);
+    }
 }
 
 // =============================================================================

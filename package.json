@@ -10,10 +10,11 @@
   },
   "dependencies": {},
   "devDependencies": {
+    "browser-sync": "^2.18.2",
     "child-process-promise": "^2.2.0",
     "colors": "^1.1.2",
     "inquirer": "^1.2.3",
-    "mithril": "^0.2.5"
+    "mithril": "git+ssh://git@github.com/lhorie/mithril.js.git"
   },
   "scripts": {
     "test": "node tasks/hello.js"

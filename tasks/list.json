@@ -1,8 +1,7 @@
 [
     {
-        "name"           : "mithril",
-        "git"            : "",
-        "defaultVersion" : "latest",
-        "promptName"     : "mithril"
+        "name"       : "mithril",
+        "version"    : "latest",
+        "promptName" : "hoge"
     }
 ]
