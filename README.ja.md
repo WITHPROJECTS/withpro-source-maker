@@ -45,6 +45,6 @@ WEBサイト制作環境を対話型で構築します。
 
 git property format is [npm install doc.](https://docs.npmjs.com/cli/install).
 
-**npm i** コマンドでパッケージのインストールした後、初回のみtasks/hello.jsが走り、WEBサイト開発環境の構築を行います。
-その際に、package.jsonにパッケージを追記し、tasks/state.jsonの"init"プロパティが **true** になります。
+**npm i** コマンドでパッケージのインストールした後、初回のみtasks/hello.jsが走り、WEBサイト開発環境の構築を行います。  
+その際に、package.jsonにパッケージを追記し、tasks/state.jsonの"init"プロパティが **true** になります。  
 そのため、2回目以降の **npm i** ではtasks/hello.jsは実行されません。

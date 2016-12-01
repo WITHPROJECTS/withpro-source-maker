@@ -1,8 +1,6 @@
 [
     {
-        "name"       : "mithril",
-        "git"        : "git+ssh://git@github.com:lhorie/mithril.js.git",
-        "version"    : "latest",
-        "promptName" : "hoge"
+        "name" : "withpro-gulp-sass",
+        "git"  : "git+ssh://git@github.com:WITHPROJECTS/withpro-gulp-sass.git"
     }
 ]

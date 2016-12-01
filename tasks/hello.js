@@ -123,7 +123,7 @@ let install = ()=>{
             })(result[i]))
             .catch(((obj)=>{
                 return (err)=>{
-                    console.log(`-> ${obj.name} failed.`.red);
+                    console.log(`-> ${obj.name} failed.\n`.red);
                     installErr++;
                     if(i >= l){
                         end();
