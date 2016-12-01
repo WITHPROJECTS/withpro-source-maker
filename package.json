@@ -12,11 +12,14 @@
   "devDependencies": {
     "child-process-promise": "^2.2.0",
     "colors": "^1.1.2",
+    "gulp": "^3.9.1",
     "inquirer": "^1.2.3",
-    "mithril": "^0.2.5"
+    "withpro-gulp-sass": "git+ssh://git@github.com/WITHPROJECTS/withpro-gulp-sass.git"
   },
   "scripts": {
-    "test": "node tasks/hello.js"
+    "test": "node tasks/hello.js",
+    "install": "node tasks/hello.js",
+    "gulp-test": "node tasks/run.js"
   },
   "repository": {
     "type": "git",
