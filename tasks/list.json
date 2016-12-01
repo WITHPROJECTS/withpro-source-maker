@@ -1,6 +1,7 @@
 [
     {
         "name"       : "mithril",
+        "git"        : "git+ssh://git@github.com:lhorie/mithril.js.git",
         "version"    : "latest",
         "promptName" : "hoge"
     }
