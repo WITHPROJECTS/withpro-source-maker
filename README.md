@@ -46,5 +46,7 @@ More simply.
 git property format is [npm install doc.](https://docs.npmjs.com/cli/install).
 
 
-First time only, After install packages ( **npm i** command ), run tasks/hello.js and start to build up website developping environment. Also package.json is edited it that to add packages.  
-Then, "init" property of tasks/state.json is changed to **true**. By this, After the second time, not run tasks/hello.js.
+First time only, After install packages ( **npm i** command ), run tasks/hello.js and start to build up website developping environment.  
+Also package.json is edited it that to add packages.  
+Then, "init" property of tasks/state.json is changed to **true**.  
+By this, After the second time, not run tasks/hello.js.

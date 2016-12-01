@@ -4,5 +4,5 @@
 **/temp/
 **/.cache/
 **/usr/*
-npm-debug.log
+npm-debug.log*
 .sass-cache

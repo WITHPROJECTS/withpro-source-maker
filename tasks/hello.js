@@ -1,12 +1,45 @@
+let fs        = require("fs-extra");
+let path      = require("path");
 let colors    = require("colors");
 let inquirer  = require("inquirer");
 let spawn     = require('child-process-promise').spawn;
+let exec      = require('child-process-promise').exec;
 let myPackage = require("../package.json");
 let state     = require("./state.json");
 let tasksData = require("./list.json");
 let prompt    = inquirer.createPromptModule();
 let tasks     = [];
 let result    = [];
+let debug     = true;
+
+// /////////////////////////////////////////////////////////////////////////////
+//
+// Set
+//
+// /////////////////////////////////////////////////////////////////////////////
+// let copyBinFile = (destPath)=>{
+//     let srcFilePath  = path.join(__dirname, 'bin.js');
+//     let destFilePath = path.join(destPath, myPackage.name);
+//     exec(`cp ${srcFilePath} ${destFilePath}`);
+// }
+//
+// exec('npm bin').childProcess.stdout.on('data', (data)=>{
+//     let binDir      = data.toString();
+//     let binFilePath = path.join(binDir, myPackage.name);
+//     if(debug){
+//         copyBinFile(binDir);
+//     }else{
+//         try{ fs.statSync(binFilePath) } catch(err) {
+//             if(err.code === 'ENOENT') copyBinFile(binDir);
+//         }
+//     }
+// });
+
+// /////////////////////////////////////////////////////////////////////////////
+//
+// Add packages
+//
+// /////////////////////////////////////////////////////////////////////////////
 
 if(state.init) return false;
 state.init = true;
@@ -139,7 +172,7 @@ let install = ()=>{
     }
     let end = ()=>{
         if(installErr){
-            console.log(`process is all done. but ${installErr} package fail to install.`.red);
+            console.log(`process is all done. but ${installErr} package fail to install.\nthus, not overwrite state.json.`.red);
         }else{
             console.log(`process is all done.`.green);
         }
@@ -153,7 +186,11 @@ let npmInstall = (obj)=>{
     if(!obj.git){
         return spawn(`npm`, [`i`, `-D`, `${obj.name}@${obj.version}`]);
     }else{
-        return spawn(`npm`, [`i`, `-D`, `${obj.git}`]);
+        if(obj.version === 'latest'){
+            return spawn(`npm`, [`i`, `-D`, `${obj.git}`]);
+        }else{
+            return spawn(`npm`, [`i`, `-D`, `${obj.git}#${obj.version}`]);
+        }
     }
 }
 
