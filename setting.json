@@ -1,0 +1,27 @@
+{
+  "init": true,
+  "path": {
+    "project": "/",
+    "src": {
+      "sass": "asset/sass",
+      "font": "asset/font",
+      "js": "asset/js",
+      "coffee": "asset/coffee",
+      "image": "asset/img",
+      "lib": [
+        "src/sass"
+      ]
+    },
+    "dest": {
+      "css": "dist/css",
+      "image": "dist/img",
+      "js": "dist/js",
+      "font": "dist/font"
+    }
+  },
+  "modules" : {
+    "withpro-gulp-sass" : {
+      "browsers" : ["last 3 version"]
+    }
+  }
+}

@@ -15,12 +15,15 @@
     "fs-extra": "^1.0.0",
     "gulp": "^3.9.1",
     "inquirer": "^1.2.3",
+    "minimist": "^1.2.0",
     "withpro-gulp-sass": "git+ssh://git@github.com/WITHPROJECTS/withpro-gulp-sass.git"
   },
   "scripts": {
-    "test": "node tasks/hello.js",
     "install": "node tasks/hello.js",
-    "gulp-test": "node tasks/run.js"
+    "build": "node tasks/build.js",
+    "watch": "node tasks/watch.js",
+    "gulp-build": "node tasks/build.js -t gulp",
+    "gulp-watch": "node tasks/watch.js -t gulp"
   },
   "repository": {
     "type": "git",

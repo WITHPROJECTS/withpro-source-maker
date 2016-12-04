@@ -1,39 +1,16 @@
-let fs        = require("fs-extra");
-let path      = require("path");
-let colors    = require("colors");
-let inquirer  = require("inquirer");
-let spawn     = require('child-process-promise').spawn;
-let exec      = require('child-process-promise').exec;
-let myPackage = require("../package.json");
-let state     = require("./state.json");
-let tasksData = require("./list.json");
-let prompt    = inquirer.createPromptModule();
-let tasks     = [];
-let result    = [];
-let debug     = true;
-
-// /////////////////////////////////////////////////////////////////////////////
-//
-// Set
-//
-// /////////////////////////////////////////////////////////////////////////////
-// let copyBinFile = (destPath)=>{
-//     let srcFilePath  = path.join(__dirname, 'bin.js');
-//     let destFilePath = path.join(destPath, myPackage.name);
-//     exec(`cp ${srcFilePath} ${destFilePath}`);
-// }
-//
-// exec('npm bin').childProcess.stdout.on('data', (data)=>{
-//     let binDir      = data.toString();
-//     let binFilePath = path.join(binDir, myPackage.name);
-//     if(debug){
-//         copyBinFile(binDir);
-//     }else{
-//         try{ fs.statSync(binFilePath) } catch(err) {
-//             if(err.code === 'ENOENT') copyBinFile(binDir);
-//         }
-//     }
-// });
+let fs          = require("fs-extra");
+let path        = require("path");
+let colors      = require("colors");
+let inquirer    = require("inquirer");
+let spawn       = require('child-process-promise').spawn;
+let exec        = require('child-process-promise').exec;
+let myPackage   = require("../package.json");
+let settingFile = require("../setting.json");
+let tasksData   = require("./module-list.json");
+let prompt      = inquirer.createPromptModule();
+let tasks       = [];
+let result      = [];
+let debug       = true;
 
 // /////////////////////////////////////////////////////////////////////////////
 //
@@ -41,8 +18,8 @@ let debug     = true;
 //
 // /////////////////////////////////////////////////////////////////////////////
 
-if(state.init) return false;
-state.init = true;
+if(settingFile.init) return false;
+settingFile.init = true;
 
 tasksData.forEach((obj)=>{
     obj.version    = typeof obj.version === 'undefined' ? 'latest' : obj.version;
@@ -172,9 +149,11 @@ let install = ()=>{
     }
     let end = ()=>{
         if(installErr){
-            console.log(`process is all done. but ${installErr} package fail to install.\nthus, not overwrite state.json.`.red);
+            console.log(`process is all done. but ${installErr} package fail to install.\nthus, not overwrite setting.json.`.red);
         }else{
             console.log(`process is all done.`.green);
+            settingFile.init = true;
+            fs.writeFile(path.join(__dirname, '../setting.json'), JSON.stringify(settingFile, null, 2));
         }
     }
     set();
