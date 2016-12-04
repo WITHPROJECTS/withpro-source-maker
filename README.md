@@ -4,13 +4,13 @@ Build up website developping environment in the form of interactive command line
 
 More simply.
 
-# Usage
+# Usage Init.
 
-1. Open tasks/list.json at editor.
-2. Write your needed packages into tasks/list.json.
+1. Open setting.json at editor.
+2. Write your needed packages into modules property of setting.json.
 3. Run [ **npm i** ] command at prompt.
 
-## tasks/list.json
+## setting.json modules property
 
 | Key        | Value Type | defaultValue | Description                     |
 |------------|------------|--------------|---------------------------------|
@@ -19,7 +19,7 @@ More simply.
 | version    | string     | "latest"     | package version                 |
 | promptName | string     | name         | on prompt package name          |
 
-### tasks/list.json For example.
+### modules property For example.
 
 ```js
 // from npm
@@ -43,10 +43,13 @@ More simply.
 
 ```
 
-git property format is [npm install doc.](https://docs.npmjs.com/cli/install).
+git property format is [npm install doc.](https://docs.npmjs.com/cli/install)
 
 
 First time only, After install packages ( **npm i** command ), run tasks/hello.js and start to build up website developping environment.  
 Also package.json is edited it that to add packages.  
-Then, "init" property of tasks/state.json is changed to **true**.  
+Then, "init" property of setting.json is changed to **true**.  
 By this, After the second time, not run tasks/hello.js.
+
+# Usage task
+
