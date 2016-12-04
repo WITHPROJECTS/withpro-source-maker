@@ -1,5 +1,5 @@
 {
-  "init": true,
+  "init": false,
   "path": {
     "project": "/",
     "src": {
@@ -19,9 +19,12 @@
       "font": "dist/font"
     }
   },
-  "modules" : {
-    "withpro-gulp-sass" : {
-      "browsers" : ["last 3 version"]
+  "modules": [
+    {
+      "name": "withpro-gulp-sass",
+      "git": "git+ssh://git@github.com:WITHPROJECTS/withpro-gulp-sass.git",
+      "version": "latest",
+      "promptName": "withpro-gulp-sass"
     }
-  }
+  ]
 }
